@@ -39,6 +39,9 @@ class msrtm_robots_txt {
 	function __construct() {
 		$check_public_blog = get_option( "blog_public" );
 		if( $check_public_blog == "0" ) { return; }
+		
+		// Skip notice if request URI not exist
+		$_SERVER['REQUEST_URI'] =  !isset($_SERVER['REQUEST_URI']) ? '' : $_SERVER['REQUEST_URI'];
 
 		/** ===================================================== if robots.txt file, continue */
 		if( substr( strrchr( $_SERVER['REQUEST_URI'], "/" ), 1 ) == "robots.txt" || $_SERVER['REQUEST_URI'] == "/robots.txt" || $_ENV['REQUEST_URI'] == "/robots.txt" ) {
